@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+var accountBalance float64
+
 // Validate Number
 func ValidateNumber(input float64) bool {
 	if input > 0 {
@@ -40,17 +42,24 @@ func DepositMoney() float64{
 		}
 		fmt.Println()
 		fmt.Println("This will take a couple of seconds to process...")
-		time.Sleep(5 * time.Second)
 		fmt.Println("......................................")
-		time.Sleep(5 * time.Second)
-		fmt.Println()
-		fmt.Printf("Cool! You've just put %v JayGolds into your Account\n", depositAmount)
 		return depositAmount
 	}
 }
 
+// Process Deposit
+func ProcessDeposit(depositAmount float64) float64 {	
+	time.Sleep(20 * time.Second)
+	fmt.Println()
+	fmt.Println("*******************************************************")
+	fmt.Printf("Cool! Your deposit of %v JayGolds into your Account is now available\n", depositAmount)
+	fmt.Println("*******************************************************")
+	accountBalance += depositAmount
+	return accountBalance
+}
+
 // Withdraw
-func WithdrawMoney(accountBalance float64) float64 {
+func WithdrawMoney() float64 {
 	var withdrawAmount float64
 	for {
 		fmt.Println()
@@ -68,12 +77,13 @@ func WithdrawMoney(accountBalance float64) float64 {
 		fmt.Println("......................................")
 		time.Sleep(3 * time.Second)
 		fmt.Printf("Sweet! You've just taken %v JayGolds out of your Account\n", withdrawAmount)
-		return withdrawAmount
+		accountBalance -= withdrawAmount
+		return accountBalance
 	}
 }
 
 // Balance
-func GetBalance(accountBalance float64) float64 {
+func GetBalance() float64 {
 	fmt.Println()
 	fmt.Println("Don't be too disappointed...here is your bank balance!")
 	fmt.Println("......................................")

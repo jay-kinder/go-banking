@@ -8,7 +8,7 @@ import (
 
 func main() {
 	var name string
-	var accountBalance float64
+	
 
 	fmt.Println("Welcome to the Go Banking Application!")
 	fmt.Println("------------------------------------")
@@ -22,14 +22,13 @@ func main() {
 		switch menuInput {
 			case 1:
 				depositAmount := helper.DepositMoney()
-				accountBalance += depositAmount	
+				go helper.ProcessDeposit(depositAmount)	
 				helper.AfterSelection(name)
 			case 2:
-				withdrawAmount := helper.WithdrawMoney(accountBalance)
-				accountBalance -= withdrawAmount
+				helper.WithdrawMoney()				
 				helper.AfterSelection(name)
 			case 3:
-				helper.GetBalance(accountBalance)
+				helper.GetBalance()
 				helper.AfterSelection(name)
 			case 4:
 				os.Exit(0)
@@ -38,5 +37,3 @@ func main() {
 		}
 	}
 }
-
-// Concurrency on deposit - increase time for processing
