@@ -1,6 +1,7 @@
 package main
 
 import (
+	"banking-app/database"
 	"banking-app/helper"
 	"fmt"
 	"os"
@@ -9,6 +10,8 @@ import (
 func main() {
 	var name string
 	
+
+	database.DbConnection()
 
 	fmt.Println("Welcome to the Go Banking Application!")
 	fmt.Println("------------------------------------")
