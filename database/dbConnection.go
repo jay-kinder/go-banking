@@ -12,6 +12,14 @@ import (
 
 var db *sql.DB
 
+type User struct {
+    ID     int64
+    Name  string
+    Email string
+    Password string
+	Balance int
+}
+
 func DbConnection() {
 	cfg := mysql.Config{
 		User: os.Getenv("DBUSER"),

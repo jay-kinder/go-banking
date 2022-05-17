@@ -4,6 +4,7 @@ import (
 	"banking-app/database"
 	"banking-app/helper"
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -20,8 +21,16 @@ func main() {
 	
 	fmt.Println("Firstly, what is your name?")
 	fmt.Scan(&name)
-	fmt.Println("Next, what is your email (this will be your account Username)?")
+
+	// Checking DB for User
+	fmt.Println("Next, what is your email")
 	fmt.Scan(&email)
+	users, err := database.CurrentUserCheck(email)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Users found: %v\n", users)
+	// --------------------------------------
 
 	for {
 		menuInput := helper.HomePage(name)
