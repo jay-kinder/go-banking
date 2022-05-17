@@ -133,6 +133,5 @@ func validateNumber(input float64) bool {
 	}
 }
 
-//Handle non numeric input...
 // Helper functions for all the functions
 // Concurrency on deposit - increase time for processing
