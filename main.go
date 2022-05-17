@@ -10,7 +10,7 @@ func main() {
 	var name string
 	var accountBalance float64
 
-    fmt.Println("Welcome to the Go Banking Application!")
+	fmt.Println("Welcome to the Go Banking Application!")
 	fmt.Println("------------------------------------")
 	
 	fmt.Println("Firstly, what is your name?")
@@ -67,6 +67,7 @@ func depositMoney() float64{
 		time.Sleep(5 * time.Second)
 		fmt.Println("......................................")
 		time.Sleep(5 * time.Second)
+		fmt.Println()
 		fmt.Printf("Cool! You've just put %v JayGolds into your Account\n", depositAmount)
 		return depositAmount
 	}
@@ -75,6 +76,7 @@ func depositMoney() float64{
 func withdrawMoney(accountBalance float64) float64 {
 	var withdrawAmount float64
 	for {
+		fmt.Println()
 		fmt.Println("Awesome! Let's take some money out of your account.")
 		fmt.Println()
 		fmt.Println("How much would you like to take out (JGs)?")
