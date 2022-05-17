@@ -10,11 +10,7 @@ var accountBalance float64
 
 // Validate Number
 func ValidateNumber(input float64) bool {
-	if input > 0 {
-		return true
-	} else {
-		return false
-	}
+	return input > 0
 }
 
 // HomePage
