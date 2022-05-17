@@ -9,15 +9,19 @@ import (
 
 func main() {
 	var name string
+	var email string
 	
 
 	database.DbConnection()
 
+	fmt.Println()
 	fmt.Println("Welcome to the Go Banking Application!")
 	fmt.Println("------------------------------------")
 	
 	fmt.Println("Firstly, what is your name?")
 	fmt.Scan(&name)
+	fmt.Println("Next, what is your email (this will be your account Username)?")
+	fmt.Scan(&email)
 
 	for {
 		menuInput := helper.HomePage(name)
