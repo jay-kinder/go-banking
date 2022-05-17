@@ -2,6 +2,14 @@ package database
 
 import "fmt"
 
+type User struct {
+    ID     int64
+    Name  string
+    Email string
+    Password string
+	Balance int
+}
+
 func CurrentUserCheck(email string) ([]User, error) {
 	var users []User
 	rows, err := db.Query("SELECT * FROM users WHERE email=?", email)
