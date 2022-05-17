@@ -2,7 +2,7 @@
 
 Simple CLI Application to practice Go.
 
-To connect to a Database (you will need to set one up called `go_banking`):
+To connect to a MYSQL Database (you will need to set one up called `go_banking`):
 
 ```bash
 export DBUSER=dbusername
