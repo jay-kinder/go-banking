@@ -1,6 +1,6 @@
 package database
 
-import "fmt"
+import "banking-app/helper"
 
 type User struct {
     ID     int64
@@ -8,24 +8,12 @@ type User struct {
 	Balance int
 }
 
-func CurrentUserCheck(email string) ([]User, error) {
-	var users []User
-	rows, err := db.Query("SELECT * FROM users WHERE email=?", email)
-	if err != nil {
-		return nil, fmt.Errorf("CurrentUserCheck %q: %v", email, err)
+func CurrentUserCheck(email string, name string) {
+	var usr User
+	row := db.QueryRow("SELECT * FROM users WHERE email=?", email)
+	if err := row.Scan(&usr.Email); err != nil {
+		helper.SignUp(email, name)
+	} else {
+		helper.HomePage(name)
 	}
-	defer rows.Close()
-
-	for rows.Next() {
-		var usr User
-		if err := rows.Scan(&usr.Email); err != nil {
-			return nil, fmt.Errorf("CurrentUserCheck %q: %v", email, err)
-		}
-		users = append(users, usr)
-	}
-
-	if err := rows.Err(); err != nil {
-		return nil, fmt.Errorf("CurrentUserCheck %q: %v", email, err)
-	}
-	return users, nil
 }
