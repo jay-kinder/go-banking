@@ -19,7 +19,7 @@ func HomePage(name string){
 	var menuInput uint
 
 	fmt.Println("------------------------------------")
-	fmt.Printf("\nCheers %v! Please select from the following services:\n\n1. Deposit Moneys\n2. Withdraw Moneys\n3. See Account Balance\n4. Exit\n", name)
+	fmt.Println("\nPlease select from the following services:\n\n1. Deposit Moneys\n2. Withdraw Moneys\n3. See Account Balance\n4. Exit")
 	fmt.Println()
 	fmt.Println("Choice: ")
 	fmt.Scan(&menuInput)
@@ -139,5 +139,6 @@ func SignUp(email string, name string) {
 	databaseQueries.AddUser()
 
 	fmt.Printf("Success! Your account is set up with the email: %v \n", email)
+	fmt.Printf("\nCheers %v!\n", name)
 	HomePage(name)
 }
