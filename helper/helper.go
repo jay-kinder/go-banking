@@ -1,7 +1,7 @@
 package helper
 
 import (
-	"banking-app/databaseQueries"
+	"banking-app/database"
 	"fmt"
 	"os"
 	"time"
@@ -136,9 +136,8 @@ func SignUp(email string, name string) {
 	time.Sleep(5 * time.Second)
 
 	// Insert User into the Database
-	databaseQueries.AddUser()
+	database.AddUser(email, name)
 
-	fmt.Printf("Success! Your account is set up with the email: %v \n", email)
 	fmt.Printf("\nCheers %v!\n", name)
 	HomePage(name)
 }

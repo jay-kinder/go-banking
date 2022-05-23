@@ -1,23 +1,18 @@
 package database
 
-import (
-	"banking-app/helper"
-	"fmt"
-)
-
 type User struct {
     ID     int64
     Email string
 	Balance int
+	Name string
 }
 
-func CurrentUserCheck(email string, name string) {
+func CurrentUserCheck(email string) (User, error) {
 	var usr User
 	row := db.QueryRow("SELECT * FROM users WHERE email=?", email)
-	if err := row.Scan(&usr.Email); err != nil { 
-		helper.SignUp(email, name)
+	if err := row.Scan(&usr.ID, &usr.Email, &usr.Balance, &usr.Name); err != nil { 	
+		return usr, err
 	} else {
-		fmt.Printf("\nWelcome Back %v!\n", name)
-		helper.HomePage(name)
+		return usr, nil
 	}
 }
