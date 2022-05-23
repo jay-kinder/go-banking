@@ -9,8 +9,7 @@ import (
 
 func main() {
 	var name string
-	var email string
-	
+	var email string	
 
 	database.DbConnection()
 
