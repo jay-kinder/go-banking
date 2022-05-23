@@ -17,9 +17,9 @@ func main() {
 
 	fmt.Println("Firstly, what is your name?")
 	fmt.Scan(&name)
-
-	// Checking DB for User
 	fmt.Println("Next, what is your email")
 	fmt.Scan(&email)
+
+	// Checking DB for User
 	database.CurrentUserCheck(email, name)	
 }
