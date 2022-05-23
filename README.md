@@ -17,9 +17,7 @@ Your database should have the following `users` table set up:
 | Field    | Type         | Null | Key | Default | Extra          |
 +----------+--------------+------+-----+---------+----------------+
 | id       | int(11)      | NO   | PRI | NULL    | auto_increment |
-| name     | varchar(128) | NO   |     | NULL    |                |
 | email    | varchar(128) | NO   |     | NULL    |                |
-| password | varchar(128) | NO   |     | NULL    |                |
 | balance  | int(11)      | YES  |     | NULL    |                |
 +----------+--------------+------+-----+---------+----------------+
 ```
