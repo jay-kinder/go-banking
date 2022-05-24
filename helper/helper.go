@@ -93,6 +93,7 @@ func WithdrawMoney(email string) {
 		time.Sleep(3 * time.Second)
 		database.WithdrawMoney(withdrawAmount, email)
 		fmt.Printf("Sweet! You've just taken %v JayGolds out of your Account\n", withdrawAmount)
+		break
 	}
 }
 
@@ -104,10 +105,10 @@ func GetBalance(email string) {
 	time.Sleep(3 * time.Second)
 	accountBalance, err := database.BalanceCheck(email)
 	if err != nil {
-		fmt.Printf("Balance: %v JayGolds\n", accountBalance)
-	} else {
 		fmt.Printf("Could not process your request. Error: %v", err)
 		os.Exit(1)
+	} else {
+		fmt.Printf("Balance: %v JayGolds\n", accountBalance)
 	}	
 }
 
