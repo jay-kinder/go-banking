@@ -27,7 +27,7 @@ func HomePage(name string, email string){
 	for {
 		switch menuInput {
 			case 1:
-				depositAmount := DepositMoney()
+				depositAmount := DepositMoney(email)
 				go ProcessDeposit(depositAmount)	
 				AfterSelection(name, email)
 			case 2:
@@ -45,7 +45,7 @@ func HomePage(name string, email string){
 }
 
 // Deposit
-func DepositMoney() float64{
+func DepositMoney(email string) float64 {
 	var depositAmount float64
 	for {
 		fmt.Println()
@@ -56,6 +56,7 @@ func DepositMoney() float64{
 			fmt.Println("You need to enter a positive number, you silly sausage!")
 			continue
 		}
+		database.DepositMoney(depositAmount, email)
 		fmt.Println()
 		fmt.Println("This will take a couple of seconds to process...")
 		fmt.Println("......................................")
@@ -64,14 +65,12 @@ func DepositMoney() float64{
 }
 
 // Process Deposit
-func ProcessDeposit(depositAmount float64) float64 {	
+func ProcessDeposit(depositAmount float64) {	
 	time.Sleep(20 * time.Second)
 	fmt.Println()
 	fmt.Println("**********************************************************************")
 	fmt.Printf("Cool! Your deposit of %v JayGolds into your Account is now available\n", depositAmount)
 	fmt.Println("**********************************************************************")
-	accountBalance += depositAmount
-	return accountBalance
 }
 
 // Withdraw
@@ -106,7 +105,7 @@ func GetBalance(email string) {
 	time.Sleep(3 * time.Second)
 	accountBalance, err := database.GetBalance(email)
 	if err != nil {
-		fmt.Printf("Balance: %v JayGolds\n", accountBalance.Balance)
+		fmt.Printf("Balance: %v JayGolds\n", accountBalance)
 	} else {
 		fmt.Printf("Could not process your request. Error: %v", err)
 		os.Exit(1)
