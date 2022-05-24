@@ -5,7 +5,7 @@ import "fmt"
 type User struct {
     ID     int64
     Email string
-	Balance int
+	Balance float64
 	Name string
 }
 
