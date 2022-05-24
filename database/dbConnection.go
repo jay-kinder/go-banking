@@ -33,4 +33,5 @@ func DbConnection() {
 		log.Fatal(pingErr)
 	}
 	fmt.Println(time.Now().Date())
+	fmt.Println("Connected to the Bank of Jay.")
 }

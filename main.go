@@ -13,7 +13,6 @@ func main() {
 	database.DbConnection()
 
 	fmt.Println()
-	fmt.Println("Welcome to the Go Banking Application!")
 	fmt.Println("------------------------------------")
 
 	fmt.Println("What is your Email Address?")
