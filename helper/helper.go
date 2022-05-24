@@ -7,8 +7,6 @@ import (
 	"time"
 )
 
-var accountBalance float64
-
 // Validate Number
 func ValidateNumber(input float64) bool {
 	return input > 0
@@ -27,11 +25,11 @@ func HomePage(name string, email string){
 	for {
 		switch menuInput {
 			case 1:
-				depositAmount := DepositMoney(email)
-				go ProcessDeposit(depositAmount)	
+				depositAmount := DepositMoney()
+				go ProcessDeposit(depositAmount, email)	
 				AfterSelection(name, email)
 			case 2:
-				WithdrawMoney()				
+				WithdrawMoney(email)				
 				AfterSelection(name, email)
 			case 3:
 				GetBalance(email)
@@ -45,7 +43,7 @@ func HomePage(name string, email string){
 }
 
 // Deposit
-func DepositMoney(email string) float64 {
+func DepositMoney() float64 {
 	var depositAmount float64
 	for {
 		fmt.Println()
@@ -56,7 +54,6 @@ func DepositMoney(email string) float64 {
 			fmt.Println("You need to enter a positive number, you silly sausage!")
 			continue
 		}
-		database.DepositMoney(depositAmount, email)
 		fmt.Println()
 		fmt.Println("This will take a couple of seconds to process...")
 		fmt.Println("......................................")
@@ -65,17 +62,20 @@ func DepositMoney(email string) float64 {
 }
 
 // Process Deposit
-func ProcessDeposit(depositAmount float64) {	
+func ProcessDeposit(depositAmount float64, email string) float64 {	
 	time.Sleep(20 * time.Second)
 	fmt.Println()
+	database.DepositMoney(depositAmount, email)
 	fmt.Println("**********************************************************************")
 	fmt.Printf("Cool! Your deposit of %v JayGolds into your Account is now available\n", depositAmount)
 	fmt.Println("**********************************************************************")
+	return depositAmount
 }
 
 // Withdraw
-func WithdrawMoney() float64 {
+func WithdrawMoney(email string) {
 	var withdrawAmount float64
+	accountBalance, _ := database.GetBalance(email)
 	for {
 		fmt.Println()
 		fmt.Println("Awesome! Let's take some money out of your account.")
@@ -91,9 +91,8 @@ func WithdrawMoney() float64 {
 		time.Sleep(3 * time.Second)
 		fmt.Println("......................................")
 		time.Sleep(3 * time.Second)
+		database.WithdrawMoney(withdrawAmount, email)
 		fmt.Printf("Sweet! You've just taken %v JayGolds out of your Account\n", withdrawAmount)
-		accountBalance -= withdrawAmount
-		return accountBalance
 	}
 }
 
@@ -109,8 +108,7 @@ func GetBalance(email string) {
 	} else {
 		fmt.Printf("Could not process your request. Error: %v", err)
 		os.Exit(1)
-	}
-	
+	}	
 }
 
 // AfterSelection (go back to select another service, or exit)

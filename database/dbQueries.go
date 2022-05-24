@@ -19,7 +19,7 @@ func AddUser(name string, email string) {
 
 func GetBalance(email string) (float64, error) {
 	var usr User
-	row := db.QueryRow("SELECT balance FROM users WHERE email=?", email)
+	row := db.QueryRow("SELECT balance FROM users WHERE email=?")
 	if err := row.Scan(&usr.ID, &usr.Email, &usr.Balance, &usr.Name); err != nil {
 		return float64(usr.Balance), err
 	} else {
@@ -28,11 +28,22 @@ func GetBalance(email string) (float64, error) {
 }
 
 func DepositMoney(depositAmount float64, email string) {
-	result, err := db.Exec("UPDATE users SET balance=? WHERE email=?", depositAmount, email)
+	result, err := db.Exec("UPDATE users SET balance=balance+? WHERE email=?", depositAmount, email)
 	if err == nil {
 		result.LastInsertId()
 	} else {
 		fmt.Printf("Error adding the Dollar to your Account. Erorr: %v", err)
+		fmt.Println()
+		os.Exit(1)
+	}
+}
+
+func WithdrawMoney(withdrawAmount float64, email string) {
+	result, err := db.Exec("UPDATE users SET balance=balance-? WHERE email=?", withdrawAmount, email)
+	if err == nil {
+		result.LastInsertId()
+	} else {
+		fmt.Printf("Error retrieving the Dollar to your Account. Erorr: %v", err)
 		fmt.Println()
 		os.Exit(1)
 	}
