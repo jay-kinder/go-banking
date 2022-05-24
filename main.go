@@ -16,15 +16,13 @@ func main() {
 	fmt.Println("Welcome to the Go Banking Application!")
 	fmt.Println("------------------------------------")
 
-	fmt.Println("Firstly, what is your name?")
-	fmt.Scan(&name)
-	fmt.Println("Next, what is your email")
+	fmt.Println("What is your Email Address?")
 	fmt.Scan(&email)
 
 	// Checking DB for User
 	usr, err := database.CurrentUserCheck(email) 
 	if err != nil {
-		helper.SignUp(email, name)
+		helper.SignUp(email)
 	} else {
 		fmt.Printf("\nWelcome Back %v!\n", usr.Name)
 		helper.HomePage(name, email)

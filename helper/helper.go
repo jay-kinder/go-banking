@@ -135,9 +135,12 @@ func AfterSelection(name string, email string) {
 }
 
 // Sign Up
-func SignUp(email string, name string) {
+func SignUp(email string) {
+	var name string
 	fmt.Println("\nYou do not have an account with us!")
-	fmt.Println("\nYou will now be automatically enrolled with the Bank of Jay")
+	fmt.Println("Please let us know what we should call you!")
+	fmt.Scan(&name)
+	fmt.Println("\nYou will now be enrolled with the Bank of Jay")
 	fmt.Println("..........................................................")
 	time.Sleep(5 * time.Second)
 
