@@ -15,7 +15,7 @@ func ValidateNumber(input float64) bool {
 }
 
 // Main Menu Choice
-func HomePage(name string){
+func HomePage(name string, email string){
 	var menuInput uint
 
 	fmt.Println("------------------------------------")
@@ -29,13 +29,13 @@ func HomePage(name string){
 			case 1:
 				depositAmount := DepositMoney()
 				go ProcessDeposit(depositAmount)	
-				AfterSelection(name)
+				AfterSelection(name, email)
 			case 2:
 				WithdrawMoney()				
-				AfterSelection(name)
+				AfterSelection(name, email)
 			case 3:
-				GetBalance()
-				AfterSelection(name)
+				GetBalance(email)
+				AfterSelection(name, email)
 			case 4:
 				os.Exit(0)
 			default:
@@ -99,17 +99,23 @@ func WithdrawMoney() float64 {
 }
 
 // Balance
-func GetBalance() float64 {
+func GetBalance(email string) {
 	fmt.Println()
 	fmt.Println("Don't be too disappointed...here is your bank balance!")
 	fmt.Println("......................................")
 	time.Sleep(3 * time.Second)
-	fmt.Printf("Balance: %v JayGolds\n", accountBalance)
-	return accountBalance
+	accountBalance, err := database.GetBalance(email)
+	if err != nil {
+		fmt.Printf("Balance: %v JayGolds\n", accountBalance.Balance)
+	} else {
+		fmt.Printf("Could not process your request. Error: %v", err)
+		os.Exit(1)
+	}
+	
 }
 
 // AfterSelection (go back to select another service, or exit)
-func AfterSelection(name string) {
+func AfterSelection(name string, email string) {
 	var inputSelection uint
 	for {
 		fmt.Println()
@@ -118,7 +124,7 @@ func AfterSelection(name string) {
 
 		switch inputSelection {
 			case 1:
-				HomePage(name)
+				HomePage(name, email)
 			case 2:
 				os.Exit(0)
 			default:
@@ -136,8 +142,8 @@ func SignUp(email string, name string) {
 	time.Sleep(5 * time.Second)
 
 	// Insert User into the Database
-	database.AddUser(email, name)
+	database.AddUser(name, email)
 
 	fmt.Printf("\nCheers %v!\n", name)
-	HomePage(name)
+	HomePage(name, email)
 }

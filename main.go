@@ -27,6 +27,6 @@ func main() {
 		helper.SignUp(email, name)
 	} else {
 		fmt.Printf("\nWelcome Back %v!\n", usr.Name)
-		helper.HomePage(name)
+		helper.HomePage(name, email)
 	}
 }
