@@ -33,7 +33,7 @@ func WithdrawMoney(withdrawAmount float64, email string) {
 	if err == nil {
 		result.LastInsertId()
 	} else {
-		fmt.Printf("Error retrieving the Dollar to your Account. Erorr: %v", err)
+		fmt.Printf("Error retrieving the Dollar from your Account. Erorr: %v", err)
 		fmt.Println()
 		os.Exit(1)
 	}
