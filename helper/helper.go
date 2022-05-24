@@ -75,7 +75,7 @@ func ProcessDeposit(depositAmount float64, email string) float64 {
 // Withdraw
 func WithdrawMoney(email string) {
 	var withdrawAmount float64
-	accountBalance, _ := database.GetBalance(email)
+	accountBalance, _ := database.BalanceCheck(email)
 	for {
 		fmt.Println()
 		fmt.Println("Awesome! Let's take some money out of your account.")
@@ -102,7 +102,7 @@ func GetBalance(email string) {
 	fmt.Println("Don't be too disappointed...here is your bank balance!")
 	fmt.Println("......................................")
 	time.Sleep(3 * time.Second)
-	accountBalance, err := database.GetBalance(email)
+	accountBalance, err := database.BalanceCheck(email)
 	if err != nil {
 		fmt.Printf("Balance: %v JayGolds\n", accountBalance)
 	} else {
