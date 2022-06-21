@@ -8,6 +8,9 @@
 		"redhat.vscode-yaml",
 		"golang.go"
 	],
+	"mounts": [
+		"source=${localEnv:HOME}/.zsh_history,target=/home/vscode/.zsh_history,type=bind"
+	],
 	"postCreateCommand": "pre-commit install",
 	"remoteUser": "vscode"
 }

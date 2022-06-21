@@ -7,6 +7,8 @@ ENV GO_VERSION=1.18.2
 RUN apt update && export DEBIAN_FRONTEND=noninteractive && \
   apt upgrade -y && \
   apt -y install --no-install-recommends \
+  build-essential \
+  python3-dev \
   zsh \
   && apt clean -y && rm -rf /var/lib/apt/lists/*
 
